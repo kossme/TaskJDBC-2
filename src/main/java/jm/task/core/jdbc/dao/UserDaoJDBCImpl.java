@@ -9,18 +9,13 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
 
-    final String USER = "root";
-    final String PASS = "root";
-    final String URL = "jdbc:mysql://127.0.0.1:3306/myDBtest?useUnicode=true&useSSL=true&useJDBCCompliantTimezoneShift=true" +
-            "&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-
     public UserDaoJDBCImpl() {
 
     }
 
-    public void createUsersTable() {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASS)) {
-            Statement statement =  connection.createStatement();
+    public void createUsersTable()  {
+        try(Connection connection = Util.connect();
+            Statement statement =  connection.createStatement()) {
             String sqlCommand = "CREATE TABLE IF NOT EXISTS Users (Id BIGINT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(30), lastName VARCHAR(30), age TINYINT)";
             statement.executeUpdate(sqlCommand);
         } catch (java.sql.SQLException e) {
