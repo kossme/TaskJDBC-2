@@ -19,7 +19,8 @@ public class Main {
         User user4 = new User("Mavludahon", "Namil-ogly", (byte) 26);
 
         final UserService userService = new UserServiceImpl();
-        //userService.dropUsersTable();
+
+        userService.dropUsersTable();
 
         userService.createUsersTable();
         userService.saveUser(user1.getName(),user1.getLastName(),user1.getAge());
@@ -35,6 +36,8 @@ public class Main {
         for(User a : users) {
             System.out.println(a);
         }
+
+        userService.cleanUsersTable();
 
         userService.cleanUsersTable();
 
